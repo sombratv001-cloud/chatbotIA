@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gelado no Ponto - Chatbot</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f0f2f5; height: 100vh; display: flex; flex-direction: column; }
+        .chat-container { flex-grow: 1; overflow-y: auto; padding: 20px; }
+        .message { max-width: 75%; margin-bottom: 15px; padding: 10px 15px; border-radius: 15px; }
+        .user-msg { background-color: #dcf8c6; align-self: flex-end; margin-left: auto; }
+        .bot-msg { background-color: #ffffff; align-self: flex-start; border: 1px solid #dee2e6; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-primary shadow">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">🍦 Sorveteria Gelado no Ponto</span>
+        </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

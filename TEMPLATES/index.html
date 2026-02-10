@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-3 d-flex flex-column" style="height: 80vh;">
+    <div id="chat-window" class="chat-container d-flex flex-column border rounded bg-white shadow-sm">
+        <div class="message bot-msg">
+            Olá! Bem-vindo à Gelado no Ponto. 🧊<br>
+            Deseja um <strong>Açaí na Garrafa</strong> ou um <strong>Milkshake</strong> hoje?
+        </div>
+    </div>
+
+    <div class="input-group mt-3 pb-3">
+        <input type="text" id="user-input" class="form-control" placeholder="Digite sua mensagem..." aria-label="Mensagem">
+        <button class="btn btn-primary" onclick="sendMessage()" type="button">Enviar</button>
+    </div>
+</div>
+
+<script>
+    async function sendMessage() {
+        const input = document.getElementById('user-input');
+        const chatWindow = document.getElementById('chat-window');
+        const message = input.value.trim();
+
+        if (!message) return;
+
+        // Adiciona mensagem do usuário na tela
+        chatWindow.innerHTML += `<div class="message user-msg">${message}</div>`;
+        input.value = '';
+
+        // Rola para o fim
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+
+        // Chamada fake para o backend
+        const response = await fetch('/send_message', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: message })
+        });
+        
+        const data = await response.json();
+
+        // Adiciona resposta do bot
+        chatWindow.innerHTML += `<div class="message bot-msg">${data.response}</div>`;
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+
+    // Permitir enviar com "Enter"
+    document.getElementById('user-input').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') sendMessage();
+    });
+</script>
+{% endblock %}
