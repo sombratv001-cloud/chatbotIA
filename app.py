@@ -61,6 +61,12 @@ def index():
     historico = []
     return render_template('index.html')
 
+@app.route('/projeto2')
+def projeto2():
+    global historico
+    historico = []
+    return render_template('projeto2.html')
+
 @app.route('/send_message', methods=['POST'])
 def chat():
     msg = request.json.get('message')
